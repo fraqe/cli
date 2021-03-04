@@ -242,15 +242,13 @@ All commands:
                     
                     aliases: clean-install, ic, install-clean, isntall-clean
 
-    completion      source <(npm completion)
+    completion      npm completion | source
 
     config          npm config set <key>=<value> [<key>=<value> ...]
                     npm config get [<key> [<key> ...]]
                     npm config delete <key> [<key> ...]
                     npm config list [--json]
                     npm config edit
-                    npm set <key>=<value> [<key>=<value> ...]
-                    npm get [<key> [<key> ...]]
                     
                     alias: c
 
@@ -287,18 +285,7 @@ All commands:
                     npm exec -c '<cmd> [args...]'
                     npm exec --package=foo -c '<cmd> [args...]'
                     
-                    npx <pkg>[@<specifier>] [args...]
-                    npx -p <pkg>[@<specifier>] <cmd> [args...]
-                    npx -c '<cmd> [args...]'
-                    npx -p <pkg>[@<specifier>] -c '<cmd> [args...]'
-                    Run without --call or positional args to open interactive subshell
-                    
-                    
                     alias: x
-                    common options: 
-                    --package=<pkg> (may be specified multiple times)
-                    -p is a shorthand for --package only when using npx executable
-                    -c <cmd> --call=<cmd> (may not be mixed with positional arguments)
 
     explain         npm explain <folder | specifier>
                     
@@ -308,9 +295,7 @@ All commands:
 
     find-dupes      npm find-dupes
 
-    fund            npm fund
-                    
-                    common options: npm fund [--json] [--browser] [--unicode] [[<@scope>/]<pkg> [--which=<fundingSourceNumber>]
+    fund            npm fund [--json] [--browser] [--unicode] [[<@scope>/]<pkg> [--which=<fundingSourceNumber>]
 
     get             npm get [<key> ...] (See \`npm config\`)
 
@@ -323,10 +308,9 @@ All commands:
                     npm hook rm <id>
                     npm hook update <id> <url> <secret>
 
-    init            
-                    npm init [--force|-f|--yes|-y|--scope]
-                    npm init <@scope> (same as \`npx <@scope>/create\`)
-                    npm init [<@scope>/]<name> (same as \`npx [<@scope>/]create-<name>\`)
+    init            npm init npm init [--force|-f|--yes|-y|--scope]
+                    npm init npm init <@scope> (same as \`npx <@scope>/create\`)
+                    npm init npm init [<@scope>/]<name> (same as \`npx [<@scope>/]create-<name>\`)
                     
                     aliases: create, innit
 
@@ -340,18 +324,25 @@ All commands:
                     npm install <tarball file>
                     npm install <tarball url>
                     npm install <git:// url>
-                    npm install <github username>/<github project>
+                    npm install <github username>/<github project> [--save-prod|--save-dev|--save-optional|--save-peer] [--save-exact] [--no-save]
                     
                     aliases: i, in, ins, inst, insta, instal, isnt, isnta, isntal, add
-                    common options: [--save-prod|--save-dev|--save-optional|--save-peer] [--save-exact] [--no-save]
 
-    install-ci-test npm install-ci-test [args]
-                    Same args as \`npm ci\`
+    install-ci-test npm install-ci-test
                     
                     alias: cit
 
-    install-test    npm install-test [args]
-                    Same args as \`npm install\`
+    install-test    npm install-test (with no args, in package dir)
+                    npm install-test [<@scope>/]<pkg>
+                    npm install-test [<@scope>/]<pkg>@<tag>
+                    npm install-test [<@scope>/]<pkg>@<version>
+                    npm install-test [<@scope>/]<pkg>@<version range>
+                    npm install-test <alias>@npm:<name>
+                    npm install-test <folder>
+                    npm install-test <tarball file>
+                    npm install-test <tarball url>
+                    npm install-test <git:// url>
+                    npm install-test <github username>/<github project> [--save-prod|--save-dev|--save-optional|--save-peer] [--save-exact] [--no-save]
                     
                     alias: it
 
@@ -370,7 +361,7 @@ All commands:
 
     logout          npm logout [--registry=<url>] [--scope=<@scope>]
 
-    ls              npm ls [[<@scope>/]<pkg> ...]
+    ls              npm ls npm ls [[<@scope>/]<pkg> ...]
                     
                     alias: list
 
@@ -390,23 +381,20 @@ All commands:
 
     pack            npm pack [[<@scope>/]<pkg>...] [--dry-run]
 
-    ping            npm ping
-                    ping registry
+    ping            ping registry
+                    
+                    npm ping
 
     prefix          npm prefix [-g]
 
     profile         npm profile enable-2fa [auth-only|auth-and-writes]
-                    
-                    
-                    common options: npm profile disable-2fa
-                    
+                    npm profile disable-2fa
+                    npm profile get [<key>]
+                    npm profile set <key> <value>
 
     prune           npm prune [[<@scope>/]<pkg>...] [--production]
 
     publish         npm publish [<folder>] [--tag <tag>] [--access <public|restricted>] [--dry-run]
-                    
-                    Publishes '.' if no argument supplied
-                    Sets tag \`latest\` if no --tag specified
 
     rebuild         npm rebuild [[<@scope>/]<name>[@<version>] ...]
                     
@@ -433,7 +421,6 @@ All commands:
     shrinkwrap      npm shrinkwrap
 
     star            npm star [<pkg>...]
-                    npm unstar [<pkg>...]
 
     stars           npm stars [<user>]
 
@@ -446,7 +433,6 @@ All commands:
                     npm team add <scope:team> <user> [--otp <otpcode>]
                     npm team rm <scope:team> <user> [--otp <otpcode>]
                     npm team ls <scope>|<scope:team>
-                    
 
     test            npm test [-- <args>]
                     
@@ -462,20 +448,13 @@ All commands:
 
     unpublish       npm unpublish [<@scope>/]<pkg>[@<version>]
 
-    unstar          npm star [<pkg>...]
-                    npm unstar [<pkg>...]
+    unstar          npm unstar [<pkg>...]
 
     update          npm update [-g] [<pkg>...]
                     
                     aliases: up, upgrade, udpate
 
     version         npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]
-                    (run in package dir)
-                    
-                    'npm -v' or 'npm --version' to print npm version ({VERSION})
-                    'npm view <pkg> version' to view a package's published version
-                    'npm ls' to inspect current package/dependency versions
-                    
                     
                     alias: verison
 
@@ -483,8 +462,9 @@ All commands:
                     
                     aliases: v, info, show
 
-    whoami          npm whoami [--registry <registry>]
-                    (just prints username according to given registry)
+    whoami          prints username according to given registry
+                    
+                    npm whoami [--registry <registry>]
 
 Specify configs in the ini-formatted file:
     /some/config/file/.npmrc
